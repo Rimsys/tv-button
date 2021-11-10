@@ -8,7 +8,6 @@
       type="button"
       class="relative inline-flex items-center"
       :class="[sizes[size], current_theme.primary, current_theme.dark, cursor, is_active ? current_theme.active : current_theme.disabled ]"
-      @click="click"
     >
         <slot />
       <span v-if="ping" class="absolute top-0 right-0 -mr-1 -mt-1 z-10">
