@@ -8137,12 +8137,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"46501c2a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/PushButton.vue?vue&type=template&id=6664932c&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.to !== false)?_c('n-link',{attrs:{"to":_vm.to}},[_c('button',{staticClass:"relative inline-flex items-center",class:[_vm.sizes[_vm.size], _vm.current_theme.primary, _vm.current_theme.dark, _vm.cursor, _vm.is_active ? _vm.current_theme.active : _vm.current_theme.disabled ],attrs:{"type":"button"}},[_vm._t("default"),(_vm.ping)?_c('span',{staticClass:"absolute top-0 right-0 -mr-1 -mt-1 z-10"},[_c('span',{staticClass:"flex w-3 h-3 relative"},[_c('span',{staticClass:"animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",class:_vm.ping}),_c('span',{staticClass:"relative inline-flex rounded-full h-3 w-3",class:_vm.ping})])]):_vm._e()],2)]):_c('span',[_c('button',{staticClass:"relative inline-flex items-center",class:[_vm.sizes[_vm.size], _vm.current_theme.primary, _vm.current_theme.dark, _vm.cursor, _vm.is_active ? _vm.current_theme.active : _vm.current_theme.disabled ],attrs:{"type":"button"},on:{"click":_vm.click}},[_vm._t("default"),(_vm.ping)?_c('span',{staticClass:"absolute top-0 right-0 -mr-1 -mt-1 z-10"},[_c('span',{staticClass:"flex w-3 h-3 relative"},[_c('span',{staticClass:"animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",class:_vm.ping}),_c('span',{staticClass:"relative inline-flex rounded-full h-3 w-3",class:_vm.ping})])]):_vm._e()],2)])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"46501c2a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/PushButton.vue?vue&type=template&id=353cb726&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{staticClass:"relative inline-flex items-center",class:[_vm.sizes[_vm.size], _vm.current_theme.primary, _vm.current_theme.dark, _vm.cursor, _vm.is_active ? _vm.current_theme.active : _vm.current_theme.disabled, _vm.innerGroup[_vm.group] ],attrs:{"type":"button"},on:{"click":_vm.click}},[_vm._t("default"),(_vm.ping)?_c('span',{staticClass:"absolute top-0 right-0 -mr-1 -mt-1 z-10"},[_c('span',{staticClass:"flex w-3 h-3 relative"},[_c('span',{staticClass:"animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",class:_vm.ping}),_c('span',{staticClass:"relative inline-flex rounded-full h-3 w-3",class:_vm.ping})])]):_vm._e()],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/PushButton.vue?vue&type=template&id=6664932c&
+// CONCATENATED MODULE: ./src/PushButton.vue?vue&type=template&id=353cb726&
 
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.runtime.esm.js
 var vue_runtime_esm = __webpack_require__("2b0e");
@@ -8165,10 +8165,11 @@ var vue_runtime_esm = __webpack_require__("2b0e");
         ping: {
             type: String,
         },
-        to: {
-            type: [Boolean, String],
+        group: {
+            type: String,
             required: false,
-            default: false,
+            default: 'single',
+            validator: function (group) { return ['single', 'left', 'right', 'middle'].includes(group); }
         },
     },
     data: function () {
@@ -8275,6 +8276,22 @@ var vue_runtime_esm = __webpack_require__("2b0e");
                 l: 'px-4 py-2 text-base leading-6',
                 xl: 'px-6 py-3 text-base leading-6',
             },
+            outerGroup: {
+                single: 'rounded-md',
+                left: 'rounded-l-md',
+                leftNm: 'rounded-l-md',
+                middle: '-ml-px',
+                right: 'rounded-r-md',
+                rightNm: 'rounded-r-md',
+            },
+            innerGroup: {
+                single: 'rounded-md',
+                left: 'rounded-l-md border-r-0 focus:z-10',
+                leftNm: 'rounded-l-md focus:z-10',
+                middle: 'focus:z-10',
+                right: 'rounded-none rounded-r-md border-l-0 focus:z-10',
+                rightNm: 'rounded-r-md focus:z-10',
+            },
         };
     },
     computed: {
@@ -8298,7 +8315,6 @@ var vue_runtime_esm = __webpack_require__("2b0e");
     },
     methods: {
         click: function () {
-            console.log(this.to);
             if (this.is_active)
                 this.$emit('click');
         },

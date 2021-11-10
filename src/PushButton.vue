@@ -1,35 +1,18 @@
 <template>
-  <n-link v-if="to !== false" :to="to">
-    <button
-      type="button"
-      class="relative inline-flex items-center"
-      :class="[sizes[size], current_theme.primary, current_theme.dark, cursor, is_active ? current_theme.active : current_theme.disabled ]"
-    >
-      <slot />
-      <span v-if="ping" class="absolute top-0 right-0 -mr-1 -mt-1 z-10">
-        <span class="flex w-3 h-3 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="ping"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" :class="ping"></span>
-        </span>
+  <button
+    type="button"
+    class="relative inline-flex items-center"
+    :class="[sizes[size], current_theme.primary, current_theme.dark, cursor, is_active ? current_theme.active : current_theme.disabled, innerGroup[group] ]"
+    @click="click"
+  >
+    <slot />
+    <span v-if="ping" class="absolute top-0 right-0 -mr-1 -mt-1 z-10">
+      <span class="flex w-3 h-3 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="ping"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3" :class="ping"></span>
       </span>
-    </button>
-  </n-link>
-  <span v-else>
-    <button
-      type="button"
-      class="relative inline-flex items-center"
-      :class="[sizes[size], current_theme.primary, current_theme.dark, cursor, is_active ? current_theme.active : current_theme.disabled ]"
-      @click="click"
-    >
-      <slot />
-      <span v-if="ping" class="absolute top-0 right-0 -mr-1 -mt-1 z-10">
-        <span class="flex w-3 h-3 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="ping"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" :class="ping"></span>
-        </span>
-      </span>
-    </button>
-  </span>
+    </span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -57,10 +40,11 @@ export default Vue.extend({
     ping: {
       type: String,
     },
-    to: {
-      type: [Boolean, String],
+    group: {
+      type: String,
       required: false,
-      default: false,
+      default: 'single',
+      validator: group => ['single', 'left', 'right', 'middle'].includes(group)
     },
   },
   data () {
@@ -167,6 +151,22 @@ export default Vue.extend({
         l: 'px-4 py-2 text-base leading-6',
         xl: 'px-6 py-3 text-base leading-6',
       },
+      outerGroup: {
+        single: 'rounded-md',
+        left: 'rounded-l-md',
+        leftNm: 'rounded-l-md',
+        middle: '-ml-px',
+        right: 'rounded-r-md',
+        rightNm: 'rounded-r-md',
+      },
+      innerGroup: {
+        single: 'rounded-md',
+        left: 'rounded-l-md border-r-0 focus:z-10',
+        leftNm: 'rounded-l-md focus:z-10',
+        middle: 'focus:z-10',
+        right: 'rounded-none rounded-r-md border-l-0 focus:z-10',
+        rightNm: 'rounded-r-md focus:z-10',
+      },
     }
   },
   computed: {
@@ -187,7 +187,6 @@ export default Vue.extend({
   },
   methods: {
     click (): void {
-      console.log(this.to)
       if (this.is_active) this.$emit('click')
     },
   },
