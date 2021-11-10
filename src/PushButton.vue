@@ -1,41 +1,18 @@
 <template>
-  <n-link
-    v-if="to !== false"
-    :to="to"
-    :class="['inline-flex']"
+  <button
+    type="button"
+    class="relative inline-flex items-center"
+    :class="[sizes[size], current_theme.primary, current_theme.dark, cursor, is_active ? current_theme.active : current_theme.disabled ]"
+    @click="click"
   >
-    <button
-      type="button"
-      class="relative inline-flex items-center"
-      :class="[sizes[size], current_theme.primary, current_theme.dark, cursor, is_active ? current_theme.active : current_theme.disabled ]"
-    >
-        <slot />
-      <span v-if="ping" class="absolute top-0 right-0 -mr-1 -mt-1 z-10">
-        <span class="flex w-3 h-3 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="ping"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" :class="ping"></span>
-        </span>
+      <slot />
+    <span v-if="ping" class="absolute top-0 right-0 -mr-1 -mt-1 z-10">
+      <span class="flex w-3 h-3 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="ping"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3" :class="ping"></span>
       </span>
-    </button>
-  </n-link>
-  <span
-    v-else
-  >
-    <button
-      type="button"
-      class="relative inline-flex items-center"
-      :class="[sizes[size], current_theme.primary, current_theme.dark, cursor, is_active ? current_theme.active : current_theme.disabled ]"
-      @click="click"
-    >
-        <slot />
-      <span v-if="ping" class="absolute top-0 right-0 -mr-1 -mt-1 z-10">
-        <span class="flex w-3 h-3 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="ping"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3" :class="ping"></span>
-        </span>
-      </span>
-    </button>
-  </span>
+    </span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -193,6 +170,7 @@ export default Vue.extend({
   },
   methods: {
     click (): void {
+      console.log('click event', this.to)
       if (this.is_active) this.$emit('click')
     },
   },
