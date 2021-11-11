@@ -161,7 +161,7 @@ export default Vue.extend({
       },
       innerGroup: {
         single: 'rounded-md',
-        left: 'rounded-l-md border-r-0 focus:z-10',
+        left: 'rounded-none rounded-l-md border-r-0 focus:z-10',
         leftNm: 'rounded-l-md focus:z-10',
         middle: 'rounded-none focus:z-10 -ml-px',
         right: 'rounded-none rounded-r-md border-l-0 focus:z-10',
