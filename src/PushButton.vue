@@ -61,7 +61,7 @@ export default Vue.extend({
           name: 'whiteLeft',
           primary: 'border border-gray-300 shadow-sm font-medium rounded-l-md text-gray-700 bg-white',
           dark: 'dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 hover:dark:bg-gray-500 dark:ring-offset-gray-800',
-          active: 'hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-fuchsia-500 focus:border-fuchsia-500',
+          active: 'hover:bg-gray-50 focus:z-20 focus:outline-none focus:ring-1 focus:ring-fuchsia-500 focus:border-fuchsia-500',
           disabled: '',
         },
         {
